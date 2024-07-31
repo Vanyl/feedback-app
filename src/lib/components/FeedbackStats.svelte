@@ -1,17 +1,23 @@
 <script>
-    export let count;
-    export let average;
+  import { FeedbackStore } from "../../stores";
+
+  $: count = $FeedbackStore.length;
+  $: average =
+    $FeedbackStore.reduce(
+      (previousValue, { rating }) => previousValue + rating,
+      0,
+    ) / $FeedbackStore.length;
 </script>
 
 <div class="feedback-stats">
-    <h4>{count} reviews</h4>
-    <h4>ratings average: {average}</h4>
+  <h4>{count} reviews</h4>
+  <h4>ratings average: {average}</h4>
 </div>
 
 <style>
-    .feedback-stats {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  </style>
+  .feedback-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
